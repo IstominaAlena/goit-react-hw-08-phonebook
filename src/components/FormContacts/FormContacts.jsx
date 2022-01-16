@@ -2,6 +2,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { getItems } from '../../redux/contacts/contactsSelectors';
 import { addContact } from '../../redux/contacts/itemsOperations';
+import { dataCapture, resetForm } from '../../shared/functions/onFormFn';
+
 import Input from '../../shared/components/Input';
 import Button from '../../shared/components/Button';
 
@@ -14,19 +16,17 @@ const FormContacts = () => {
   function handleSubmit(e) {
     e.preventDefault();
 
-    const formElements = new FormData(e.currentTarget);
-    const contact = {};
-
-    formElements.forEach((value, name) => (contact[name] = value));
+    const contact = dataCapture(e);
 
     const { name, phone } = contact;
 
     if (!name || !phone) {
       return alert('Please fill the form');
     }
+
     checkContact(contact);
 
-    resetForm();
+    resetForm('contactForm');
   }
 
   function checkContact(contact) {
@@ -45,21 +45,13 @@ const FormContacts = () => {
     dispatch(addContact(contact));
   }
 
-  function resetForm() {
-    const nameInput = document.querySelector('input[name="name"]');
-    const numberInput = document.querySelector('input[name="phone"]');
-
-    nameInput.value = '';
-    numberInput.value = '';
-  }
-
   return (
     <>
-      <form onSubmit={handleSubmit} className={s.form}>
+      <form onSubmit={handleSubmit} className={s.form} id="contactForm">
         <Input
           labelName="Name"
           type="text"
-          name="name"
+          name={'name'}
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           placeholderValue="Jane Doe"
@@ -68,7 +60,7 @@ const FormContacts = () => {
         <Input
           labelName="Number"
           type="tel"
-          name="phone"
+          name={'phone'}
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           placeholderValue="+38-099-123-45-67"
