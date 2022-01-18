@@ -1,10 +1,16 @@
+import { useDispatch } from 'react-redux';
+
 import { dataCapture, resetForm } from '../../shared/functions/onFormFn';
+import { signupUser } from '../../redux/auth/authOperations';
 
 import Input from '../../shared/components/Input';
 import Button from '../../shared/components/Button';
+
 import s from './SignupForm.module.css';
 
 const SignupForm = () => {
+  const dispatch = useDispatch();
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -15,9 +21,7 @@ const SignupForm = () => {
     if (!name || !email || !password) {
       return alert('Please fill the form');
     }
-
-    console.log(signupData);
-
+    dispatch(signupUser(signupData));
     resetForm('signupForm');
   }
   return (
@@ -38,8 +42,8 @@ const SignupForm = () => {
           labelName="Password"
           type="password"
           name="password"
-          minLength="5"
-          maxLength="12"
+          minLength="7"
+          maxLength="20"
           placeholderValue="*********"
         />
 

@@ -3,6 +3,7 @@ export function dataCapture(e) {
   const obj = {};
 
   formElements.forEach((value, name) => (obj[name] = value));
+
   return obj;
 }
 

@@ -1,12 +1,14 @@
-import { useSelector, useDispatch } from 'react-redux';
-
 import { dataCapture, resetForm } from '../../shared/functions/onFormFn';
+import { useDispatch } from 'react-redux';
 
 import Input from '../../shared/components/Input';
 import Button from '../../shared/components/Button';
 import s from './LoginForm.module.css';
+import { loginUser } from '../../redux/auth/authOperations';
 
-const LoginForm = () => {
+const LoginPage = () => {
+  const dispatch = useDispatch();
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -18,8 +20,7 @@ const LoginForm = () => {
       return alert('Please fill the form');
     }
 
-    console.log(loginData);
-
+    dispatch(loginUser(loginData));
     resetForm('loginForm');
   }
   return (
@@ -31,8 +32,8 @@ const LoginForm = () => {
           labelName="Password"
           type="password"
           name="password"
-          minLength="5"
-          maxLength="12"
+          minLength="7"
+          maxLength="20"
           placeholderValue="*********"
         />
 
@@ -41,4 +42,4 @@ const LoginForm = () => {
     </>
   );
 };
-export default LoginForm;
+export default LoginPage;
