@@ -2,8 +2,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { memo } from 'react';
 import toonavatar from 'cartoon-avatar';
 
-import { deleteContact } from '../../redux/contacts/itemsOperations';
+import { deleteContact } from '../../redux/contacts/contactsOperations';
 import { getFilter, getItems } from '../../redux/contacts/contactsSelectors';
+
 import Button from '../../shared/components/Button';
 
 import s from './ContactList.module.css';
@@ -26,12 +27,12 @@ const ContactList = () => {
 
   return (
     <ul className={s.contactList}>
-      {filterContactsHandler().map(({ id, name, phone }) => (
+      {filterContactsHandler().map(({ id, name, number }) => (
         <li key={id} className={s.contactItem}>
           <img src={toonavatar.generate_avatar()} alt="img" width="60" className={s.contactImg} />
           <div>
             <p>{name}:</p>
-            <p>{phone}</p>
+            <p>{number}</p>
           </div>
 
           <Button type="button" text="&#128473;" onClick={() => dispatch(deleteContact(id))} />

@@ -16,10 +16,10 @@ import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger';
 
 import { default as authReduser } from './auth/authSlice';
-import contactsReduser from './contacts/contactsReduser';
+import { default as contactsReduser } from './contacts/contactsSlice';
 
 const authPersistConfig = {
-  key: 'auth',
+  key: 'auth/token',
   storage,
   whitelist: ['token'],
 };

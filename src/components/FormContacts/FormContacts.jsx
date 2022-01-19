@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getItems } from '../../redux/contacts/contactsSelectors';
-import { addContact } from '../../redux/contacts/itemsOperations';
+import { addContact } from '../../redux/contacts/contactsOperations';
 import { dataCapture, resetForm } from '../../shared/functions/onFormFn';
 
 import Input from '../../shared/components/Input';
@@ -18,9 +18,9 @@ const FormContacts = () => {
 
     const contact = dataCapture(e);
 
-    const { name, phone } = contact;
+    const { name, number } = contact;
 
-    if (!name || !phone) {
+    if (!name || !number) {
       return alert('Please fill the form');
     }
 
@@ -60,7 +60,7 @@ const FormContacts = () => {
         <Input
           labelName="Number"
           type="tel"
-          name={'phone'}
+          name={'number'}
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           placeholderValue="+38-099-123-45-67"

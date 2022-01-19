@@ -1,37 +1,27 @@
-import { lazy, Suspense } from 'react';
-import './styles/App.css';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { refreshUser } from './redux/auth/authOperations';
+import { getRefreshStatus } from './redux/auth/authSelectors';
 
 import Header from './components/Header';
+import Routes from './components/Routes';
 
-const HomePage = lazy(() => import('../../../pages/HomePage' /* webpackChunkName: "home-page" */));
-const SignupPage = lazy(() =>
-  import('../../../pages/SignupPage' /* webpackChunkName: "movies-page" */)
-);
-const LoginPage = lazy(() =>
-  import('../../../pages/LoginPage' /* webpackChunkName: "movie-details-page" */)
-);
-const ContactsPage = lazy(() =>
-  import('../../../pages/ContactsPage' /* webpackChunkName: "movie-details-page" */)
-);
+import './styles/App.css';
 
-const App = () => {
+export default function App() {
+  const dispatch = useDispatch();
+  const refreshStatus = useSelector(getRefreshStatus);
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
   return (
-    <>
-      <Header />
-
-      <Suspense fallback={<h1>Loading...</h1>}>
-        <Switch>
-          <Route exact path="/" component={<HomePage />} />
-
-          <Route exact path="/signup" component={<SignupPage />} />
-
-          <Route path="/login" omponent={<LoginPage />} />
-
-          <Route path="/contacts" omponent={<ContactsPage />} />
-        </Switch>
-      </Suspense>
-    </>
+    !refreshStatus && (
+      <>
+        <Header />
+        <Routes />
+      </>
+    )
   );
-};
-
-export default App;
+}

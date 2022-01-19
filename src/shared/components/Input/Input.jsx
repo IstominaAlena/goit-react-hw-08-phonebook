@@ -4,19 +4,7 @@ import styles from './Input.module.css';
 
 const Input = props => {
   const id = nanoid();
-
-  const {
-    labelName,
-    value,
-    onChange,
-    type,
-    name,
-    pattern,
-    title,
-    placeholderValue,
-    minLength,
-    maxLength,
-  } = props;
+  const { labelName, value, onChange, type, name, pattern, title, placeholderValue } = props;
 
   return (
     <div className={name === 'filter' ? styles.filterComponent : styles.formComponent}>
@@ -33,8 +21,6 @@ const Input = props => {
         pattern={pattern}
         title={title}
         placeholder={placeholderValue}
-        minLength={minLength}
-        maxLength={maxLength}
       />
     </div>
   );
@@ -45,8 +31,6 @@ export default Input;
 Input.defaultProps = {
   type: 'text',
   placeholder: undefined,
-  minLength: undefined,
-  maxLength: undefined,
 };
 
 Input.propTypes = {

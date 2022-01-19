@@ -1,0 +1,26 @@
+.title {
+  margin-bottom: 20px;
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 1.2;
+
+  text-align: center;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  color: var(--accent-color);
+  text-decoration: underline;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15px;
+}
+
+.link {
+  color: var(--accent-color);
+  margin-left: 1100px;
+}

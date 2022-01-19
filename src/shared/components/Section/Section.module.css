@@ -20,18 +20,7 @@
   line-height: 1.18;
   text-align: left;
   color: rgb(136, 119, 181);
-}
-
-.title::after {
-  position: absolute;
-  content: '';
-  top: 35px;
-  left: 15px;
-  width: 135px;
-  height: 4px;
-
-  border-radius: 2px;
-  background-color: rgb(136, 119, 181);
+  text-decoration: underline;
 }
 
 .contacts .title {

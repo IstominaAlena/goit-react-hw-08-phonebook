@@ -2,9 +2,10 @@ button {
   cursor: pointer;
 }
 
+.logout,
 .submitBtn {
   padding: 0;
-  width: 50%;
+  width: 100px;
   height: 25px;
   align-self: center;
   font-family: 'Caveat', cursive;

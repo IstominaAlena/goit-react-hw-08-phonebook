@@ -6,9 +6,9 @@ import { signupUser } from '../../redux/auth/authOperations';
 import Input from '../../shared/components/Input';
 import Button from '../../shared/components/Button';
 
-import s from './SignupForm.module.css';
+import s from './SignupPage.module.css';
 
-const SignupForm = () => {
+const SignupPage = () => {
   const dispatch = useDispatch();
 
   function handleSubmit(e) {
@@ -24,8 +24,10 @@ const SignupForm = () => {
     dispatch(signupUser(signupData));
     resetForm('signupForm');
   }
+
   return (
     <>
+      <h3 className={s.title}>Registration</h3>
       <form className={s.form} onSubmit={handleSubmit} id="signupForm">
         <Input
           labelName="Name"
@@ -52,4 +54,4 @@ const SignupForm = () => {
     </>
   );
 };
-export default SignupForm;
+export default SignupPage;

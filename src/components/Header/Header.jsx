@@ -1,7 +1,15 @@
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+
+import { getIsLoggedIn } from '../../redux/auth/authSelectors';
+
+import UserMenu from '../UserMenu';
+
 import s from './Header.module.css';
 
 const Header = () => {
+  const isLoggedIn = useSelector(getIsLoggedIn);
+
   return (
     <header className={s['header-section']}>
       <nav className={s.navigation}>
@@ -9,16 +17,19 @@ const Header = () => {
           Home
         </NavLink>
 
-        <NavLink to="/movies" className={s.link} activeClassName={s.active}>
-          Signup
-        </NavLink>
-        <NavLink to="/movies" className={s.link} activeClassName={s.active}>
-          Login
-        </NavLink>
-        <NavLink to="/movies" className={s.link} activeClassName={s.active}>
-          Contacts
-        </NavLink>
+        {isLoggedIn && (
+          <NavLink to="/contacts" className={s.link} activeClassName={s.active}>
+            My phonebook
+          </NavLink>
+        )}
+
+        {!isLoggedIn && (
+          <NavLink to="/login" className={s.link} activeClassName={s.active}>
+            LogIn
+          </NavLink>
+        )}
       </nav>
+      {isLoggedIn && <UserMenu />}
     </header>
   );
 };
