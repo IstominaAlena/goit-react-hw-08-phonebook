@@ -16,6 +16,7 @@ export default function App() {
 
   useEffect(() => {
     if (persistedToken === 'null') {
+      return;
     }
     dispatch(refreshUser());
   }, [dispatch]);
